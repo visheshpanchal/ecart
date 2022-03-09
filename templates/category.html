@@ -1,0 +1,38 @@
+{% extends './base/base.html' %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
+
+<nav class="row">
+
+	{% for category in categories %}
+		<div class="col-md-3">	
+			<div class="card card-category">
+			  <div class="img-wrap" style="background: #ffd7d7">
+			  	<img src="{{ category.category_image.url }}">
+			  </div>
+			  <div class="card-body">
+			    <h4 class="card-title"><a href="{% url 'category:product_all' %}?category_id={{category.id}}">{{ category.category_name | title }}</a></h4>
+			    <ul class="list-menu">
+			    	<li><a href="">4 Product Link</a></li>
+
+			    </ul>
+			  </div>
+			</div>
+		</div> <!-- col.// -->
+	{% endfor %}
+	</nav> <!-- row.// -->
+
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+
+
+{% endblock  %}
