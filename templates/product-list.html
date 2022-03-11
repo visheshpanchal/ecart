@@ -110,7 +110,7 @@
 				<img src={{ product.product_image.url }}>
 			</div> <!-- img-wrap.// -->
 			<figcaption class="info-wrap">
-					<a href="#" class="title mb-2">{{ product.product_name }}</a>
+					<a href="{% url 'category:product_details' %}?product_id={{product.product_id}}" class="title mb-2">{{ product.product_name }}</a>
 					<div class="price-wrap">
 						<span class="price">{{ product.product_price }} ₹</span> 
 						<small class="text-muted">/per item</small>

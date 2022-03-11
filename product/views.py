@@ -1,6 +1,6 @@
 
-from django.http import HttpRequest, QueryDict
-from django.shortcuts import render
+from django.http import Http404, HttpRequest, HttpResponse, QueryDict
+from django.shortcuts import redirect, render
 from django.views import View
 
 from .models import Category, Product
@@ -42,6 +42,8 @@ class ProductView(View):
                     args[k] = v
             
         if pk == None:
+            print(args)
+            # this provide args like ?category_id=4
             product = Product.objects.all().filter(**args)
         else :
             product = Product.objects.filter(product_id=pk)
@@ -67,8 +69,19 @@ class ProductDetail(View):
         
         args = dict()
         if bool(query_dict):
+            print(query_dict)
             for k,v in query_dict.items():
                 args[k] = v
         
-        
-        return render(request,"detail-product.html")
+            
+            product = Product.objects.filter(**args)
+            if bool(product) == False:
+                return HttpResponse("Product Not Found")
+
+            context_data = {
+                "pro" : product
+            }
+            print(product)
+        else :
+            return redirect("home:home_func")
+        return render(request,"detail_product.html",context_data)

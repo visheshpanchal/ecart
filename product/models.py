@@ -45,5 +45,15 @@ class Product(models.Model):
         return self.product_name
     
     
+# Product Specification
+class ProductDimensions(models.Model):
+    # We need add product id bcz we are not using foreign key
+    product_id = models.IntegerField(unique=True)
+    width = models.IntegerField(default=0)
+    hight = models.IntegerField(default=0)
+    depth = models.IntegerField(default=0)
+    
+    
 class ProductExtraDetails(models.Model):
-    pass
+    product_id = models.IntegerField(unique=True)
+    
