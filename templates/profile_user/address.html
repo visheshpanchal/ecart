@@ -1,0 +1,71 @@
+{% extends '../base/base.html' %}
+
+
+{% block content %}
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg-gray">
+<div class="container">
+	<h2 class="title-page">My account</h2>
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION PAGETOP END// ========================= -->
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+	<div class="container">
+	
+	<div class="row">
+		<aside class="col-md-3">
+			<nav class="list-group">
+				<a class="list-group-item" href="{% url 'profile:main' %}"> Account overview  </a>
+                <div class="list-group-item active"> My Address </div>
+				<a class="list-group-item" href="{% url 'profile:order' %}"> My Orders </a>
+                <a class="list-group-item" href="{% url 'profile:wishlist' %}"> My wishlist </a>
+                <a class="list-group-item" href="{% url 'profile:seller' %}"> My Selling Items </a>
+                <a class="list-group-item" href="{% url 'profile:settings' %}"> Settings </a>
+				<a class="list-group-item" href="{% url 'accounts:account_logout' %}"> Log out </a>
+			</nav>
+		</aside> <!-- col.// -->
+		<main class="col-md-9">
+
+        <!-- Print success message when user successfully add address -->
+		<a href="{% url 'profile:add_address' %}" class="btn btn-light mb-3"> <i class="fa fa-plus"></i> Add new address </a>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert" id="msg">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- END Message -->
+        
+        <div class="row">
+        {% for address in addresses %}
+            <div class="col-md-6">
+                <article class="box mb-4">
+                    <h4>{{address.first_name}} {{address.last_name}}</h4>
+                    <b><p> {{address.city}},{{address.state}} {{address.zip_number}} </p></b>
+                    <p> {{address.address_1}} <br /> {{address.phone_number}}</p>
+                    
+                    <form action="/profile/address/delete/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="deleteId" value="{{address.id}}">
+                        <button class="btn btn-light"> <i class="text-danger fa fa-trash"></i> </button>
+                    </form>
+                </article>
+            </div>  <!-- col.// -->
+        {% endfor %}
+        </div> <!-- row.// -->
+
+	</main> <!-- col.// -->
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+{% endblock content %}

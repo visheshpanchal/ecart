@@ -1,0 +1,132 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+
+<!-- Search product -->
+
+<section class="section-content padding-y">
+<header class="section-heading heading-line">
+    <h4 class="title-section text-uppercase">
+        Product
+    </h4>
+</header>
+
+{% if product %}
+
+<div class="container">
+    <div class="row">
+        {% for pd in product %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> 
+                    
+                    <img src={{ pd.product_image.url }}>
+                </div> <!-- img-wrap.// -->
+                <figcaption class="info-wrap">
+                        <a href="{% url 'category:product_details' %}?category_id={{ pd.category_id.id }}&product_id={{ pd.product_id }}" class="title mb-2">{{ pd.product_name }}</a>
+                        <div class="price-wrap">
+                            <span class="price">{{ pd.product_price }} ₹</span> 
+                            <small class="text-muted">/per item</small>
+                        </div> <!-- price-wrap.// -->
+                        
+                        <p class="mb-2">  2  <small class="text-muted">(Min Order)</small></p>
+                        
+                        <p class="text-muted ">{{ pd.product_description }}</p>
+                        <hr>
+                </figcaption>
+            </figure>
+        </div> <!-- col.// -->
+        {% endfor %}
+    </div> <!-- row end.// -->
+</div>
+</section><!-- End Product -->
+
+
+{% else %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template" style="padding: 40px 15px;text-align: center;">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    Not Found</h2>
+                <div class="error-details">
+                    Sorry, try with diffrent keyword!
+                </div>
+                <div class="error-actions" style="margin-top:15px;margin-bottom:15px;">
+                    <a href="{% url 'home:home_func' %}" class="btn btn-primary btn-lg" style="margin-right:10px;"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endif %}
+
+
+<!-- Search Category Found -->
+
+<section class="padding-bottom">
+<header class="section-heading heading-line">
+    <h4 class="title-section text-uppercase">
+        Category
+    </h4>
+</header>
+{% if category %}
+<div class="container">
+    <div class="row">
+        {% for ct in category  %}
+        <div class="col-md-3">
+            <div class="card card-home-category">
+                <div class="row no-gutters">
+                    <div class="col">
+                        <div class="home-category-banner bg-light-orange">
+                            <div class="d-inline">
+                                <h5 class="title">
+                                {{ ct.category_name }}
+                                </h5>
+                               
+                            </div>
+                            <img src="{{ ct.category_image.url }}" alt="" style="width:100px; height:100px;" class="d-inline float-right">
+                             <p>{{ ct.category_description|slice:":36" }}</p>
+                            <a href="{% url 'category:product_all' %}?category_id={{ ct.id }}" class="btn btn-outline-primary rounded-pill" >Show Category</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- col end -->
+        {% endfor %}
+    </div> <!-- row end-->
+</div>
+
+</section>
+{% else %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template" style="padding: 40px 15px;text-align: center;">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    Not Found</h2>
+                <div class="error-details">
+                    Sorry, try with diffrent keyword!
+                </div>
+                <div class="error-actions" style="margin-top:15px;margin-bottom:15px;">
+                    <a href="{% url 'home:home_func' %}" class="btn btn-primary btn-lg" style="margin-right:10px;"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

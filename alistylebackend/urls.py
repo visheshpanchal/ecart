@@ -8,6 +8,9 @@ urlpatterns = [
     path("",include("home.urls")),
     path("account/",include("accounts.urls")),
     path('category/',include('product.urls')),
+    path("profile/",include("usr.urls")),
+    path("cart/",include("cart.urls")),
+    path("search/",include("search.urls"))
    
     
 ]

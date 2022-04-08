@@ -1,5 +1,5 @@
 {% extends './base/base.html' %}
-
+{% load custom_tags %}
 {% block content %}
 
 <!-- ========================= SECTION CONTENT ========================= -->
@@ -110,7 +110,7 @@
 				<img src={{ product.product_image.url }}>
 			</div> <!-- img-wrap.// -->
 			<figcaption class="info-wrap">
-					<a href="{% url 'category:product_details' %}?product_id={{product.product_id}}" class="title mb-2">{{ product.product_name }}</a>
+					<a href="{% url 'category:product_details' %}?product_id={{product.product_id}}&category_id={{product.category_id.id}}" class="title mb-2">{{ product.product_name }}</a>
 					<div class="price-wrap">
 						<span class="price">{{ product.product_price }} ₹</span> 
 						<small class="text-muted">/per item</small>
@@ -118,7 +118,7 @@
 					
 					<p class="mb-2">  2  <small class="text-muted">(Min Order)</small></p>
 					
-					<p class="text-muted ">{{ product.product_details }}</p>
+					<p class="text-muted ">{{ product.product_details|description }}</p>
 				   
 					<hr>
 					

@@ -7,7 +7,7 @@ from .models import AuthModel
 # Register your models here.
 
 User = get_user_model()
-print(User)
+
 
 class UserAuthAdmin(UserAdmin):
     list_display = ('email','first_name','last_name','last_login')

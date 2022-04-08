@@ -1,8 +1,4 @@
-def abc(**args):
-    print(args)
-    
-    
-arg = dict()
-arg["abc"] = "a"
+from datetime import datetime
 
-abc(**arg)
+dt = datetime.now()
+print(dt)

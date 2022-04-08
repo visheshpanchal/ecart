@@ -1,0 +1,155 @@
+
+{% extends 'base/base.html' %}
+{% load custom_tags %}
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
+
+<div class="row">
+	<main class="col-md-9">
+<div class="card">
+
+<table class="table table-borderless table-shopping-cart">
+<thead class="text-muted">
+<tr class="small text-uppercase">
+  <th scope="col">Product</th>
+  <th scope="col" width="120">Quantity</th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" class="text-right" width="200"> </th>
+</tr>
+</thead>
+<tbody>
+	{% for product in products %}
+<tr>
+
+	<td>
+		<figure class="itemside">
+			<div class="aside"><img src={{ product.product.product_image.url }} class="img-sm"></div>
+			<figcaption class="info">
+				<a href="{% url 'category:product_details' %}?product_id={{product.product.product_id}}&category_id={{product.product.category_id.id}}" class="title text-dark">{{ product.product.product_name }}</a>
+				<p class="text-muted small">Size: XL, Color: blue, <br> {{ product.product.category_id.category_name | capfirst }}</p>
+			</figcaption>
+		</figure>
+	</td>
+	<td> 
+		<div class="form-group col-md flex-grow-0">
+			<div class="input-group mb-3 input-spinner">
+			  <div class="input-group-prepend">
+			    <a href={% url 'cart:increment' product.product.category_id.id product.product.product_id %} class="btn btn-light" type="button" id="button-plus"> + </a>
+			  </div>
+			  
+			  <input type="text" class="form-control" value={{ product.quantity }}>
+			  
+			  <div class="input-group-append">
+			    <a href={% url 'cart:decrement' product.product.category_id.id product.product.product_id %} class="btn btn-light" type="button" id="button-minus"> &minus; </a>
+			  </div>
+			</div>
+		</div> <!-- col.// -->
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">₹{% widthratio product.product.product_price 1 product.quantity %}</var> 
+			<small class="text-muted">₹{{ product.product.product_price }} each </small> 
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td class="text-right"> 
+	{% if product.is_wishlisted %}
+	<a data-original-title="Remove to Wishlist" title="" href="{% url 'category:product_remove' product_id=product.product.product_id category_id=product.product.category_id.id %}" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart" style="color:red;"></i></a> 
+	{% else %}
+	<a data-original-title="Add to Wishlist" title="" href="{% url 'category:product_add' product_id=product.product.product_id category_id=product.product.category_id.id %}" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart" ></i></a> 
+	
+	{% endif %}
+	<a href="{% url 'cart:remove_cart' product.product.category_id.id product.product.product_id %}" class="btn btn-light"> Remove</a>
+	</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+<div class="card-body border-top">
+	<a href="#" class="btn btn-primary float-md-right"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
+	<a href="{% url 'home:home_func' %}" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+</div>	
+</div> <!-- card.// -->
+
+<div class="alert alert-success mt-3">
+	<p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+</div>
+
+	</main> <!-- col.// -->
+	<aside class="col-md-3">
+		<div class="card mb-3">
+			<div class="card-body">
+			<form>
+				<div class="form-group">
+					<label>Have coupon?</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="" placeholder="Coupon code">
+						<span class="input-group-append"> 
+							<button class="btn btn-primary">Apply</button>
+						</span>
+					</div>
+				</div>
+			</form>
+			</div> <!-- card-body.// -->
+		</div>  <!-- card .// -->
+		<div class="card">
+			<div class="card-body">
+					<dl class="dlist-align">
+					  <dt>Total price:</dt>
+					 
+					  <dd class="text-right">INR {{  total|mul:quantity|float_convert	 }}</dd>
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Discount:</dt>
+			
+					  <dd class="text-right">INR {{ discount|mul:quantity|float_convert }}</dd>
+					  
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Total:</dt>
+					  {% mult total quantity as t%}
+					  {% mult discount quantity as d %}
+					  <dd class="text-right  h5"><strong>₹{{ t|sub:d|float_convert }}</strong></dd>
+					  
+					</dl>
+					<hr>
+					<p class="text-center mb-3">
+						<img src="images/misc/payments.png" height="26">
+					</p>
+					
+			</div> <!-- card-body.// -->
+		</div>  <!-- card .// -->
+	</aside> <!-- col.// -->
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name border-top padding-y">
+<div class="container">
+<h6>Payment and refund policy</h6>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+
+{% endblock content %}
