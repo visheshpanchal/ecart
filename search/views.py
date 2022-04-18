@@ -3,7 +3,6 @@
 from django.db.models import Q
 from django.http import HttpRequest, QueryDict
 from django.shortcuts import render
-from numpy import product
 from product.models import Category, Product
 
 

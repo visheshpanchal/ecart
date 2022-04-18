@@ -21,7 +21,14 @@ class UserProfileAddress(models.Model):
     zip_number = models.CharField(max_length=6)
     address_1 = models.CharField(null=False,max_length=256)
     address_2 = models.CharField(null=False,max_length=256)
+    is_default = models.BooleanField(default=False)
     
+
+    class Meta:
+        verbose_name_plural = "ProfileAddress"
+
+    def __str__(self) -> str:
+        return str(self.user_id) + " " + self.first_name
 
 
 

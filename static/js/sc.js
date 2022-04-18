@@ -1,9 +1,7 @@
 
 
 
-  // Get today's date and time
-
-
+// Get today's date and time
 function startTimer(duration) {
     var timer = duration;
     
@@ -48,3 +46,20 @@ if (is_bool)
     };
     
 }
+
+// Date time end
+
+// msg alert
+
+$(document).ready(function() {
+    // messages timeout for 10 sec 
+    setTimeout(function() {
+        $('#msg').fadeOut('slow');
+    }, 1000); // <-- time in milliseconds, 1000 =  1 sec
+
+    // delete message
+    // $('#del-msg').live('click',function(){
+    //     // $('#del-msg').parent().attr('style', 'display:none;');
+    //     $('#msg').attr('style', 'display:none;');
+    // })
+});

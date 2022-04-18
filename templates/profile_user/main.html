@@ -38,53 +38,42 @@
 							<img class="rounded-circle img-sm border" src="images/avatars/avatar3.jpg">
 						</div>
 						<div class="text">
-							<strong> Mr. Jackson Someone </strong> <br> 
-							<p class="mb-2"> myloginname@gmail.com  </p> 
-							<a href="#" class="btn btn-light btn-sm">Edit</a>
+							<strong> {{ user_data.0.first_name }} {{ user_data.0.last_name }} </strong> <br> 
+							<p class="mb-2"> {{ user_data.0.email }} </p> 
+							
 						</div>
 				</figure>
 				<hr>
 				<p>
 					<i class="fa fa-map-marker text-muted"></i> &nbsp; My address:  
 					 <br>
-					Tashkent city, Street name, Building 123, House 321 &nbsp 
-					<a href="#" class="btn-link"> Edit</a>
+					{{ user_address.0.address_1 }}, {{ user_address.0.zip_number }}, {{ user_address.0.state }}
 				</p>
 
 				
 
-				<article class="card-group card-stat">
+				{% comment %} <article class="card-group card-stat">
 					<figure class="card bg">
 						<div class="p-3">
 							 <h4 class="title">38</h4>
-							<span>Orders</span>
+							<span>Card Items</span>
 						</div>
 					</figure>
 					<figure class="card bg">
 						<div class="p-3">
-							 <h4 class="title">5</h4>
-							<span>Wishlists</span>
+							 <h4 class="title">38</h4>
+							<span>WishListed Items</span>
 						</div>
 					</figure>
-					<figure class="card bg">
-						<div class="p-3">
-							 <h4 class="title">12</h4>
-							<span>Awaiting delivery</span>
-						</div>
-					</figure>
-					<figure class="card bg">
-						<div class="p-3">
-							 <h4 class="title">50</h4>
-							<span>Delivered items</span>
-						</div>
-					</figure>
-				</article>
+
+
+				</article> {% endcomment %}
 				
 
-			</div> <!-- card-body .// -->
-		</article> <!-- card.// -->
+			{% comment %} </div> <!-- card-body .// -->
+		</article> <!-- card.// --> {% endcomment %}
 
-		<article class="card  mb-3">
+		{% comment %} <article class="card  mb-3">
 			<div class="card-body">
 				<h5 class="card-title mb-4">Recent orders </h5>	
 
@@ -123,7 +112,7 @@
 
 			<a href="#" class="btn btn-outline-primary btn-block"> See all orders <i class="fa fa-chevron-down"></i>  </a>
 			</div> <!-- card-body .// -->
-		</article> <!-- card.// -->
+		</article> <!-- card.// --> {% endcomment %}
 
 	</main> <!-- col.// -->
 </div>

@@ -1,5 +1,7 @@
+
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest, HttpResponse
+from django.middleware.csrf import get_token
 from django.shortcuts import redirect, render
 from django.views import View
 
@@ -42,7 +44,7 @@ class AccountRegister(View):
             user.save()
             ## Adding Default Cart Structure
             cart = default_cart.default_cart(request,user.id)
-            return redirect("home:home_func")
+            return redirect("accounts:account_login")
         else :
             return HttpResponse("Wrong Password")
         
@@ -67,7 +69,8 @@ class AccountLogin(View):
             
             return redirect("home:home_func")
         
-        return HttpResponse("Bad Request")
+    
+        return redirect("accounts:account_login")
 
 class Logout(View):
     

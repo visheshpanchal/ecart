@@ -1,14 +1,38 @@
 
 
+from accounts.models import AuthModel
+from cart.models import CartModel
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import render
+
+from usr.models import UserProfileAddress, UserProfileWishlist
 
 
 # Create your views here.
 @login_required(login_url="accounts:account_login")
 def user_profile(request:HttpRequest):
-    return render(request,"profile_user/main.html")
+    user_id = request.user.id
+    
+    user_data = AuthModel.objects.filter(pk=user_id)
+    
+    user_address = UserProfileAddress.objects.filter(user_id=user_id)
+    
+    
+    
+    return render(request,"profile_user/main.html",context={"user_data":user_data,"user_address":user_address})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

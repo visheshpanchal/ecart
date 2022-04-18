@@ -1,5 +1,5 @@
 from django.db import models
-from pandas import notnull
+
 
 
 # Create your models here.

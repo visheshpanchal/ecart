@@ -45,15 +45,23 @@
         {% for address in addresses %}
             <div class="col-md-6">
                 <article class="box mb-4">
-                    <h4>{{address.first_name}} {{address.last_name}}</h4>
+                    <h4>{{address.first_name}} {{address.last_name}} {% if address.is_default %} <small>( Default )</small>{% endif %} </h4>                  
+                    
+          
                     <b><p> {{address.city}},{{address.state}} {{address.zip_number}} </p></b>
                     <p> {{address.address_1}} <br /> {{address.phone_number}}</p>
-                    
-                    <form action="/profile/address/delete/" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="deleteId" value="{{address.id}}">
-                        <button class="btn btn-light"> <i class="text-danger fa fa-trash"></i> </button>
-                    </form>
+                    <div class="form-row" >
+                        <form action="/profile/address/delete/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="deleteId" value="{{address.id}}">
+                            <button class="btn btn-light"> <i class="text-danger fa fa-trash"></i> </button>
+                        </form>
+                        <form action="" method="post" style="margin:0px 10px;">
+                            {% csrf_token %}
+                            <button class="btn btn-light bg-primary" style="color:white;"> Edit</button>
+                        </form>
+      
+                    </div>
                 </article>
             </div>  <!-- col.// -->
         {% endfor %}

@@ -35,8 +35,7 @@ def is_wishlisted(product_id,category_id,user_id):
                 return "true"
     return ""
 
-def product_summery():
-    pass
+
 
 class Cart(View):
     def get(self,request):
